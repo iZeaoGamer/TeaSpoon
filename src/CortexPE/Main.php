@@ -222,7 +222,7 @@ class Main extends PluginBase {
 		if(Utils::checkSpoon()){
 			$this->getLogger()->error("This plugin is for PMMP only. It is meant to extend PMMP's functionality.");
 			$this->getLogger()->error("The plugin will disable itself after being later enabled by the server to prevent any interference with the existing Spoon features.");
-			$this->disable = true;
+			$this->disable = false;
 		}
 		$this->getLogger()->info("Loading Resources...");
 
