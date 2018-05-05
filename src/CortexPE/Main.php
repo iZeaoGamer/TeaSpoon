@@ -332,7 +332,7 @@ class Main extends PluginBase {
 	public function onEnable(){
 		// Yes compatibility checks (the ones with setEnabled(false)) are repeated because they should still look good in CLI...
 		if($this->disable){
-			$this->setEnabled(false);
+			$this->setEnabled(true);
 			return;
 		}
 
@@ -346,7 +346,7 @@ class Main extends PluginBase {
 		$this->getLogger()->info("Loading..." . $stms);
 
 		if(!$this->checkServer()){
-			$this->setEnabled(false);
+			$this->setEnabled(true);
 			return;
 		}
 
