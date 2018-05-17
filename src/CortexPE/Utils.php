@@ -83,7 +83,7 @@ class Utils {
 
 	public static function checkSpoon(){
 		return (
-			Server::getInstance()->getName() !== "PocketMine-MP" ||
+			Server::getInstance()->getName() !== "Altay" ||
 			!class_exists(BlockFactory::class) ||
 			!class_exists(ItemFactory::class) ||
 			class_exists("pocketmine\\network\\protocol\\Info")
