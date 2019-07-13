@@ -41,8 +41,8 @@ use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\level\Level;
 use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\CompoundTag;
-use pocketmine\network\mcpe\protocol\SetEntityLinkPacket;
-use pocketmine\network\mcpe\protocol\types\EntityLink;
+use pocketmine\network\mcpe\protocol\SetActorLinkPacket;
+use pocketmine\network\mcpe\protocol\types\ActorLink;
 use pocketmine\Player;
 
 /**
@@ -148,24 +148,24 @@ abstract class Vehicle extends PMVehicle {
 			return false;
 		}
 
-		$riding = new EntityLink();
+		$riding = new ActorLink();
 		// At least it will work... This ain't java
 		if(isset($entity->riding) && !is_null($entity->riding)){
 			// TODO: an event for the interaction
 
-			$pk = new SetEntityLinkPacket();
+			$pk = new SetActorLinkPacket();
 			$riding->fromEntityUniqueId = $this->getId(); //Weird Weird Weird
 			$riding->toEntityUniqueId = $entity->getId();
-			$riding->type = EntityLink::TYPE_REMOVE;
+			$riding->type = ActorLink::TYPE_REMOVE;
 			$pk->link = $riding;
 			$this->server->broadcastPacket($this->hasSpawned, $pk);
 
 			// Second packet, need to be send to player
 			if($entity instanceof Player){
-				$pk = new SetEntityLinkPacket();
+				$pk = new SetActorLinkPacket();
 				$riding->fromEntityUniqueId = $this->getId(); //Weird Weird Weird
 				$riding->toEntityUniqueId = $entity->getId();
-				$riding->type = EntityLink::TYPE_REMOVE;
+				$riding->type = ActorLink::TYPE_REMOVE;
 				$pk->link = $riding;
 				$entity->dataPacket($pk);
 			}
@@ -177,7 +177,7 @@ abstract class Vehicle extends PMVehicle {
 			return true;
 		}
 
-		$pk = new SetEntityLinkPacket();
+		$pk = new SetActorLinkPacket();
 		$riding->fromEntityUniqueId = $this->getId();
 		$riding->toEntityUniqueId = $entity->getId();
 		$riding->type = EntityLink::TYPE_PASSENGER;
@@ -186,10 +186,10 @@ abstract class Vehicle extends PMVehicle {
 
 		// Send the other packet to the player
 		if($entity instanceof Player){
-			$pk = new SetEntityLinkPacket();
+			$pk = new SetActorLinkPacket();
 			$riding->fromEntityUniqueId = $this->getId();
 			$riding->toEntityUniqueId = 0;
-			$riding->type = EntityLink::TYPE_PASSENGER;
+			$riding->type = ActorLink::TYPE_PASSENGER;
 			$pk->link = $riding;
 			$entity->dataPacket($pk);
 		}
