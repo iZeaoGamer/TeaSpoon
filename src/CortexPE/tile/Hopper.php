@@ -33,7 +33,7 @@
 
 declare(strict_types = 1);
 
-namespace CortexPE\tile;
+namespace Zeao\tile;
 
 use CortexPE\block\Hopper as HopperBlock;
 use CortexPE\inventory\HopperInventory;
@@ -56,6 +56,7 @@ use pocketmine\tile\ContainerTrait;
 use pocketmine\tile\Nameable;
 use pocketmine\tile\NameableTrait;
 use pocketmine\tile\Spawnable;
+use pocketmine\item\EnderEye;
 
 class Hopper extends Spawnable implements InventoryHolder, Container, Nameable {
 	use NameableTrait, ContainerTrait;
@@ -133,6 +134,7 @@ class Hopper extends Spawnable implements InventoryHolder, Container, Nameable {
 						$entity->kill();
 						continue;
 					}
+					
 
 					$itemClone = clone $item;
 					$itemClone->setCount(1);
@@ -190,7 +192,8 @@ class Hopper extends Spawnable implements InventoryHolder, Container, Nameable {
 
 			//TODO: Delay it
 			// put items to target
-			if(!($this->getLevel()->getTile($this->getBlock()->getSide(Vector3::SIDE_DOWN)) instanceof Hopper)){ // vanilla way of doing it
+			if(!($this->getLevel()->getTile($this->getBlock()->getSide(Vector3::SIDE_DOWN)) instanceof Hopper)){
+				// vanilla way of doing it
 				$target = $this->getLevel()->getTile($this->getBlock()->getSide($this->getBlock()->getDamage()));
 				if($target instanceof Container){
 					$inv = $target->getInventory();
@@ -198,6 +201,7 @@ class Hopper extends Spawnable implements InventoryHolder, Container, Nameable {
 						if($item->isNull()){
 							continue;
 						}
+						if(!$item instanceof EnderEye){
 						$targetItem = clone $item;
 						$targetItem->setCount(1);
 
