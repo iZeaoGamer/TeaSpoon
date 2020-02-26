@@ -57,7 +57,7 @@ class CommandManager {
 
 		PMServer::getInstance()->getCommandMap()->registerAll("pocketmine", $cmds);
 
-		self::overwrite(new KillCommand("kill"), "kill");
+		//self::overwrite(new KillCommand("kill"), "kill");
 	}
 
 	/*public static function overwrite(Command $cmd, string $commandName){
