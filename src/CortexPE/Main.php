@@ -122,11 +122,11 @@ class Main extends PluginBase {
 	}
 
 	public function onLoad(){
-		if(Utils::checkSpoon()){
+		/*if(Utils::checkSpoon()){
 			$this->getLogger()->error("This plugin is for PMMP only. It is meant to extend PMMP's functionality.");
 			$this->getLogger()->error("The plugin will disable itself after being later enabled by the server to prevent any interference with the existing Spoon features.");
 			Server::$isSpoon = true;
-		}
+		}*/
 		$this->getLogger()->info("Loading configuration...");
 		if(!file_exists($this->getDataFolder())){
 			@mkdir($this->getDataFolder());
@@ -173,10 +173,10 @@ class Main extends PluginBase {
 	}
 
 	public function onEnable(){
-		if(Server::$isSpoon){
+		/*if(Server::$isSpoon){
 			$this->setEnabled(false);
 			return;
-		}
+		}*/
 		$yr = 2017 . ((2017 != date('Y')) ? '-' . date('Y') : '');
 		$stms = TextFormat::DARK_GREEN . '
 		
