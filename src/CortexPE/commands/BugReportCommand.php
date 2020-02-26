@@ -52,7 +52,7 @@ class BugReportCommand extends VanillaCommand {
 		$this->setPermission("teaspoon.command.bugreport");
 	}
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args){
+	public function execute(CommandSender $sender, $commandLabel, array $args){
 		if($sender instanceof Player){
 			$sender->sendMessage("This command must be ran using the server's console.");
 
